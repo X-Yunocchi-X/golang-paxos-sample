@@ -17,7 +17,7 @@ func (p *Proposer) majority() int {
 }
 
 func (p *Proposer) proposalNumber() int {
-	return p.round << 16 | p.id
+	return p.round<<16 | p.id
 }
 
 func (p *Proposer) propose(v string) string {
@@ -26,11 +26,11 @@ func (p *Proposer) propose(v string) string {
 
 	p.round++
 	number := p.proposalNumber()
-	
+
 	// Phase 1: Prepare
 	prepareCount := 0
 	for _, aid := range p.acceptors {
-		args := &Message {
+		args := &Message{
 			Number: number,
 			From:   p.id,
 			To:     aid,

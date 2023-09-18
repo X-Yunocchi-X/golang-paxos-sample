@@ -13,10 +13,10 @@ type Message struct {
 }
 
 type Acknowledge struct {
-	Ok     bool
+	Ok       bool
 	Accepted bool
-	Number int
-	Value  any
+	Number   int
+	Value    any
 }
 
 func call(srv, name string, args *Message, reply *Acknowledge) bool {

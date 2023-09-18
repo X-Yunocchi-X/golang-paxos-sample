@@ -35,9 +35,9 @@ func TestSingleProposer(t *testing.T) {
 	defer cleanup(acceptors, learners)
 
 	proposer := &Proposer{
-		id:        1,
-		round:    0,
-		acceptors: acceptorIds,
+		id:            1,
+		round:         0,
+		acceptors:     acceptorIds,
 		totalAcceptor: len(acceptorIds),
 	}
 
@@ -61,16 +61,16 @@ func TestTwoProposers(t *testing.T) {
 	defer cleanup(acceptors, learners)
 
 	proposer1 := &Proposer{
-		id:        1,
-		round:    0,
-		acceptors: acceptorIds,
+		id:            1,
+		round:         0,
+		acceptors:     acceptorIds,
 		totalAcceptor: len(acceptorIds),
 	}
 
 	proposer2 := &Proposer{
-		id:        2,
-		round:    0,
-		acceptors: acceptorIds,
+		id:            2,
+		round:         0,
+		acceptors:     acceptorIds,
 		totalAcceptor: len(acceptorIds),
 	}
 

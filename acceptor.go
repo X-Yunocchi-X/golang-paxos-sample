@@ -10,8 +10,8 @@ import (
 type Acceptor struct {
 	lis            net.Listener
 	id             int
-	minNumber    int
-	accepted 	bool
+	minNumber      int
+	accepted       bool
 	acceptedNumber int
 	acceptedValue  any
 
@@ -57,7 +57,8 @@ func (a *Acceptor) Accept(args *Message, reply *Acknowledge) error {
 				}
 			}(learner)
 		}
-		for length > 0 {}
+		for length > 0 {
+		}
 	} else {
 		reply.Ok = false
 	}
