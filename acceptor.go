@@ -5,6 +5,7 @@ import (
 	"log"
 	"net"
 	"net/rpc"
+	"sync"
 )
 
 type Acceptor struct {
@@ -44,6 +45,10 @@ func (a *Acceptor) Accept(args *Message, reply *Acknowledge) error {
 		a.acceptedValue = args.Value
 		reply.Ok = true
 		length := len(a.learners)
+
+		waitGroup := sync.WaitGroup{}
+		waitGroup.Add(length)
+
 		for _, learner := range a.learners {
 			go func(learner int) {
 				addr := fmt.Sprintf("localhost:%d", learner)
@@ -51,14 +56,13 @@ func (a *Acceptor) Accept(args *Message, reply *Acknowledge) error {
 				args.To = learner
 				resp := new(Acknowledge)
 				ok := call(addr, "Learner.Learn", args, resp)
-				length--
+				waitGroup.Done()
 				if !ok {
 					return
 				}
 			}(learner)
 		}
-		for length > 0 {
-		}
+		waitGroup.Wait()
 	} else {
 		reply.Ok = false
 	}
